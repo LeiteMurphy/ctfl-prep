@@ -1,6 +1,6 @@
 // Offline support. Network first, so a new deploy shows up on the next open; the cache is only the offline fallback.
 const CACHE = 'ctfl-prep';
-const FILES = ['./', 'index.html', 'style.css', 'app.js', 'srs.js', 'questions-ch1.js', 'cards.js', 'manifest.webmanifest', 'icon-180.png', 'icon-512.png'];
+const FILES = ['./', 'index.html', 'style.css', 'app.js', 'srs.js', 'questions-ch1.js', 'questions-ch2.js', 'questions-ch3.js', 'questions-ch4.js', 'questions-ch5.js', 'questions-ch6.js', 'cards.js', 'manifest.webmanifest', 'icon-180.png', 'icon-512.png'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch', e => {

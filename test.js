@@ -1,6 +1,11 @@
 // Run: node test.js
 require('./srs.js');
 require('./questions-ch1.js');
+require('./questions-ch2.js');
+require('./questions-ch3.js');
+require('./questions-ch4.js');
+require('./questions-ch5.js');
+require('./questions-ch6.js');
 require('./cards.js');
 const assert = require('assert');
 const { SRS, DATA } = globalThis;
@@ -66,6 +71,14 @@ for (const q of DATA.questions) {
   assert.ok(q.a >= 0 && q.a < 4, q.id);
   assert.ok(q.exp && q.ref && q.lo, q.id);
 }
+assert.equal(SRS.buildExam(DATA.questions).length, 40);
+for (const q of DATA.questions) {
+  assert.ok(DATA.chapters[q.ch] && q.id.startsWith(q.ch + '-'), q.id);
+  assert.equal(new Set(q.opts).size, 4, q.id);
+  assert.ok(!/(opção|alternativa|letra) [A-D]|respectivamente|das anteriores/i.test(q.q + q.exp), q.id);
+}
 for (const c of DATA.cards) assert.ok(c.id && c.term && c.def, 'card ' + c.id);
+assert.equal(new Set(DATA.cards.map(c => c.id)).size, DATA.cards.length);
+assert.equal(new Set(DATA.cards.map(c => c.term.toLowerCase())).size, DATA.cards.length);
 
 console.log('ok', DATA.questions.length, 'questions,', DATA.cards.length, 'cards');
